@@ -4,3 +4,19 @@
   font-size: 1em;
   font-weight: 700;
 }
+
+input {
+  display: none !important;
+}
+
+input + label {
+  color: grey !important;
+}
+
+input:checked + label {
+  color: white !important;
+}
+
+p:hover {
+  color: white !important;
+}
