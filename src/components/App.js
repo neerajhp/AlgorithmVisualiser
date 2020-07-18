@@ -3,14 +3,16 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import Canvas from './Canvas';
 import ProgressBar from './ProgressBar';
+import SortingAlgorithms from './sorting/Algorithms';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { type: 'sorting', sortingAlgs: [], pathfindingAlgs: [] };
+    //Get all written sorting algorithms
+    const sArray = SortingAlgorithms.map((item) => item.checked);
 
-    this.changeCanvas = React.createRef();
+    this.state = { type: 'sorting', sAlgs: sArray, pfAlgs: [] };
   }
 
   //Update Canvas Algorithm Type
@@ -19,12 +21,22 @@ class App extends React.Component {
   };
 
   //Update Canvas Algorithms
-  updateAlgs = (algs) => {};
+  updateSortAlgs = (alg) => {
+    const sArray = this.state.sAlgs;
+    sArray[alg] = !sArray[alg];
+
+    this.setState({ sAlgs: sArray });
+    console.log(this.state.sAlgs); //CONSOLE LOG
+  };
 
   render() {
     return (
       <div className='structure'>
-        <Sidebar canvas={this.state} radioFn={this.updateType} />
+        <Sidebar
+          canvasState={this.state}
+          radioFn={this.updateType}
+          sortCheckFn={this.updateSortAlgs}
+        />
         <div className='interface'>
           <Canvas searchProperties={this.state.type} />
           <ProgressBar />

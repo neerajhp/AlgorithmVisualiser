@@ -1,58 +1,50 @@
 import './Sidebar.css';
 import React from 'react';
+import Checkbox from './Checkbox';
+import SortingAlgorithms from './sorting/Algorithms';
 
-class Sidebar extends React.Component {
-  constructor(props) {
-    super(props);
+const Sidebar = ({ canvasState, radioFn, sortCheckFn }) => {
+  const updateType = radioFn;
+  const updateSort = sortCheckFn;
+  const selectedSortAlgs = canvasState.sAlgs;
 
-    this.state = this.props.canvas;
-  }
-
-  render() {
+  return (
     //Function to update algorithm type {Sorting, Pathfinding}
-    var updateType = this.props.radioFn;
-    return (
-      <div className='ui left visible sidebar inverted vertical menu'>
-        <div className='header'>
-          <input
-            type='radio'
-            name='type'
-            id='sorting'
-            checked={'sorting' === this.props.canvas.type}
-            onChange={(e) => updateType(e.target.id)}
-          />
-          <label htmlFor='sorting'>Sorting Algorithms</label>
-          <div className='ui list'>
-            <div className='item'>
-              <input type='checkbox' name='sortAlg' id='heap' />
-              <label htmlFor='heap'>Heap Sort </label>
-            </div>
-            <div className='item'>
-              <input type='checkbox' name='sortAlg' id='merge' />
-              <label htmlFor='merge'>Merge Sort </label>
-            </div>
-            <div className='item'>
-              <input type='checkbox' name='sortAlg' id='quick' />
-              <label htmlFor='quick'>Quick Sort </label>
-            </div>
-            <div className='item'>
-              <input type='checkbox' name='sortAlg' id='bubble' />
-              <label htmlFor='bubble'>Bubble Sort </label>
-            </div>
-          </div>
-          <br />
-          <input
-            type='radio'
-            name='type'
-            id='pathfinding'
-            checked={'pathfinding' === this.props.canvas.type}
-            onChange={(e) => updateType(e.target.id)}
-          />
-          <label htmlFor='pathfinding'>Pathfinding Algorithms</label>
+    <div className='ui left visible sidebar inverted vertical menu'>
+      <div className='header'>
+        <input
+          type='radio'
+          name='type'
+          id='sorting'
+          checked={'sorting' === canvasState.type}
+          onChange={(e) => updateType(e.target.id)}
+        />
+        <label htmlFor='sorting'>Sorting Algorithms</label>
+
+        <div className='ui list'>
+          {SortingAlgorithms.map((alg, i) => (
+            <Checkbox
+              key={alg.name}
+              algorithm={alg}
+              checked={selectedSortAlgs[i]}
+              updateFn={() => updateSort(i)}
+            />
+          ))}
         </div>
+
+        <br />
+
+        <input
+          type='radio'
+          name='type'
+          id='pathfinding'
+          checked={'pathfinding' === canvasState.type}
+          onChange={(e) => updateType(e.target.id)}
+        />
+        <label htmlFor='pathfinding'>Pathfinding Algorithms</label>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Sidebar;

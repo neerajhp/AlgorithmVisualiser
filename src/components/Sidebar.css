@@ -17,6 +17,6 @@ input:checked + label {
   color: white !important;
 }
 
-p:hover {
+input:hover + label {
   color: white !important;
 }
