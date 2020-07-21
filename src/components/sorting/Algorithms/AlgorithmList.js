@@ -1,8 +1,11 @@
+import SelectionSort from './SelectionSort';
+
 const SortingAlgorithms = [
   {
     name: 'selectionsort',
     label: 'Selection Sort',
-    checked: false,
+    checked: true,
+    func: () => SelectionSort,
   },
   {
     name: 'mergesort',

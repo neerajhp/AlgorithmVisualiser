@@ -3,7 +3,9 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import Canvas from './Canvas';
 import ProgressBar from './ProgressBar';
-import SortingAlgorithms from './sorting/Algorithms';
+import SortingAlgorithms from './sorting/Algorithms/AlgorithmList';
+
+const DEFAULT_CANVAS = 'sorting';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,12 +14,12 @@ class App extends React.Component {
     //Get all written sorting algorithms
     const sArray = SortingAlgorithms.map((item) => item.checked);
 
-    this.state = { type: 'sorting', sAlgs: sArray, pfAlgs: [] };
+    this.state = { canvas: DEFAULT_CANVAS, sAlgs: sArray, pfAlgs: [] };
   }
 
   //Update Canvas Algorithm Type
   updateType = (type) => {
-    this.setState({ type: type });
+    this.setState({ canvas: type });
   };
 
   //Update Canvas Algorithms
@@ -26,7 +28,6 @@ class App extends React.Component {
     sArray[alg] = !sArray[alg];
 
     this.setState({ sAlgs: sArray });
-    console.log(this.state.sAlgs); //CONSOLE LOG
   };
 
   render() {
@@ -38,7 +39,10 @@ class App extends React.Component {
           sortCheckFn={this.updateSortAlgs}
         />
         <div className='interface'>
-          <Canvas searchProperties={this.state.type} />
+          <Canvas
+            searchType={this.state.canvas}
+            sortingState={this.state.sAlgs}
+          />
           <ProgressBar />
         </div>
       </div>

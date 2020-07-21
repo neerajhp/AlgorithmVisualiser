@@ -1,7 +1,7 @@
 import './Sidebar.css';
 import React from 'react';
 import Checkbox from './Checkbox';
-import SortingAlgorithms from './sorting/Algorithms';
+import SortingAlgorithms from './sorting/Algorithms/AlgorithmList';
 
 const Sidebar = ({ canvasState, radioFn, sortCheckFn }) => {
   const updateType = radioFn;
@@ -16,7 +16,7 @@ const Sidebar = ({ canvasState, radioFn, sortCheckFn }) => {
           type='radio'
           name='type'
           id='sorting'
-          checked={'sorting' === canvasState.type}
+          checked={'sorting' === canvasState.canvas}
           onChange={(e) => updateType(e.target.id)}
         />
         <label htmlFor='sorting'>Sorting Algorithms</label>
@@ -38,7 +38,7 @@ const Sidebar = ({ canvasState, radioFn, sortCheckFn }) => {
           type='radio'
           name='type'
           id='pathfinding'
-          checked={'pathfinding' === canvasState.type}
+          checked={'pathfinding' === canvasState.canvas}
           onChange={(e) => updateType(e.target.id)}
         />
         <label htmlFor='pathfinding'>Pathfinding Algorithms</label>

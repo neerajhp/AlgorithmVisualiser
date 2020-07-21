@@ -6,25 +6,35 @@ import PathfindingCanvas from './pathfinding/PathfindingCanvas';
 class Canvas extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { Canvas: 'sorting' };
+    this.state = {
+      canvas: this.props.searchType,
+      sortingState: this.props.sortingState,
+    };
   }
 
   componentDidUpdate() {
-    if (this.props.searchProperties !== this.state.Canvas) {
-      this.setState({ Canvas: this.props.searchProperties });
+    //Update canvas
+    if (this.props.searchType !== this.state.canvas) {
+      this.setState({ canvas: this.props.searchType });
+    }
+    //Update sorting algorithms
+    if (this.props.sortingState !== this.state.sortingState)
+      this.setState({ sortingState: this.props.sortingState });
+  }
+
+  renderContent() {
+    // Render sorting algorithm canvas
+    if (this.state.canvas === 'sorting') {
+      return <SortingCanvas algorithms={this.state.sortingState} />;
+
+      // Render pathfinding algorithm campas
+    } else if (this.state.canvas === 'pathfinding') {
+      return <PathfindingCanvas />;
     }
   }
 
   render() {
-    var CanvasType;
-
-    if (this.state.Canvas === 'sorting') {
-      CanvasType = <SortingCanvas />;
-    } else if (this.state.Canvas === 'pathfinding') {
-      CanvasType = <PathfindingCanvas />;
-    }
-
-    return <div className='ui segment'>{CanvasType}</div>;
+    return <div className='ui segment'>{this.renderContent()}</div>;
   }
 }
 

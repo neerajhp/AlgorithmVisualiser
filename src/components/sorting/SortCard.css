@@ -1,5 +1,12 @@
 .sortCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   margin: 10px 10px !important;
-  min-width: 30%;
+  min-height: 30%;
   flex: 1 1 auto;
+}
+
+.inactive {
+  display: none;
 }
