@@ -15,29 +15,55 @@ class SortCard extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({ run: true });
+  }
+
+  componentDidUpdate() {
+    if (this.state.algorithm !== this.props.algorithm) {
+      this.setState({
+        algorithm: this.props.algorithm,
+        enterArray: [...this.props.array],
+        leaveArray: [...this.props.array],
+      });
+    }
     if (this.state.run) {
-      this.state.algorithm.func(this.state.enterArray, this.updateGraph);
+      this.setState({
+        run: this.state.algorithm.func(this.state.enterArray, this.updateGraph),
+      });
     }
   }
 
-  updateGraph = (i, min) => {
-    const tmpArray = this.state.leaveArray;
+  setStateSynchronous(stateUpdate) {
+    return new Promise((resolve) => {
+      this.setState(stateUpdate, () => resolve());
+    });
+  }
+
+  updateGraph = async (i, min) => {
+    console.log('Swap ');
+    const tmpArray = [...this.state.leaveArray];
+    // console.log('tmp Before ' + tmpArray);
     let tmp = tmpArray[i];
     tmpArray[i] = tmpArray[min];
     tmpArray[min] = tmp;
-    console.log('Update State');
-    this.setState({ enterArray: this.state.leaveArray, leaveArray: tmpArray });
+
+    // console.log('tmp After ' + tmpArray);
+    console.log('leave before ' + this.state.leaveArray);
+    await this.setStateSynchronous((state) => ({
+      enterArray: [...this.state.leaveArray],
+      leaveArray: [...tmpArray],
+    }));
+    console.log('leave after ' + this.state.leaveArray);
+
     return tmpArray;
   };
 
   render() {
-    const inactive = this.props.selected ? '' : 'inactive';
-
+    console.log('Rendering ');
     return (
-      <div className={`ui segment sortCard ${inactive}`}>
+      <div className='ui segment sortCard'>
         <div>{this.state.algorithm.label}</div>
         <Graph
-          algorithm={this.state.algorithm}
           enterArray={this.state.enterArray}
           leaveArray={this.state.leaveArray}
         />

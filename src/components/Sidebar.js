@@ -1,47 +1,66 @@
 import './Sidebar.css';
 import React from 'react';
-import Checkbox from './Checkbox';
 import SortingAlgorithms from './sorting/Algorithms/AlgorithmList';
 
-const Sidebar = ({ canvasState, radioFn, sortCheckFn }) => {
-  const updateType = radioFn;
-  const updateSort = sortCheckFn;
-  const selectedSortAlgs = canvasState.sAlgs;
+const Sidebar = ({ canvasState, updateType, updateSort, runFn }) => {
+  var sorting = '';
+  var pathfinding = '';
+
+  // Very simple accordion conditional
+  if (canvasState.canvas === 'sorting') {
+    sorting = 'active';
+  } else {
+    pathfinding = 'active';
+  }
+
+  // Play icon
+  var icon = 'play';
+  if (canvasState.active) {
+    icon = 'pause';
+  }
 
   return (
     //Function to update algorithm type {Sorting, Pathfinding}
     <div className='ui left visible sidebar inverted vertical menu'>
-      <div className='header'>
-        <input
-          type='radio'
-          name='type'
-          id='sorting'
-          checked={'sorting' === canvasState.canvas}
-          onChange={(e) => updateType(e.target.id)}
-        />
-        <label htmlFor='sorting'>Sorting Algorithms</label>
-
-        <div className='ui list'>
-          {SortingAlgorithms.map((alg, i) => (
-            <Checkbox
-              key={alg.name}
-              algorithm={alg}
-              checked={selectedSortAlgs[i]}
-              updateFn={() => updateSort(i)}
-            />
-          ))}
+      <div className='ui accordion'>
+        <div
+          className={`title ${sorting} `}
+          onClick={() => updateType('sorting')}
+        >
+          Sorting Algorithms
+        </div>
+        <div className={`content ${sorting} `}>
+          <div className='ui list'>
+            {SortingAlgorithms.map((alg) => (
+              <React.Fragment key={alg.name}>
+                <input
+                  type='radio'
+                  name='sorting-algorithms'
+                  id={alg.name}
+                  checked={alg === canvasState.sortingAlg}
+                  onChange={(e) => updateSort(alg)}
+                />
+                <label htmlFor={alg.name}>{alg.label}</label>
+                <br />
+              </React.Fragment>
+            ))}
+          </div>
         </div>
 
         <br />
 
-        <input
-          type='radio'
-          name='type'
-          id='pathfinding'
-          checked={'pathfinding' === canvasState.canvas}
-          onChange={(e) => updateType(e.target.id)}
-        />
-        <label htmlFor='pathfinding'>Pathfinding Algorithms</label>
+        <div
+          className={`title ${pathfinding}`}
+          onClick={() => updateType('pathfinding')}
+        >
+          Pathfinding Algorithms
+        </div>
+      </div>
+
+      <div className='control'>
+        <button onClick={() => runFn()}>
+          <i className={`huge green ${icon} circle outline icon`} />
+        </button>
       </div>
     </div>
   );

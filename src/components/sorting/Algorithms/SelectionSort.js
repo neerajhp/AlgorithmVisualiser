@@ -11,8 +11,10 @@ function SelectionSort(array, updateGraph) {
     }
     if (min !== i) {
       tmpArray = updateGraph(min, i);
+      console.log(tmpArray);
     }
   }
+  return false;
 }
 
 export default SelectionSort;

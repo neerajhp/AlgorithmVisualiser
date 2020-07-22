@@ -8,7 +8,7 @@ class Canvas extends React.Component {
     super(props);
     this.state = {
       canvas: this.props.searchType,
-      sortingState: this.props.sortingState,
+      sortingAlg: this.props.sortingAlg,
     };
   }
 
@@ -18,14 +18,15 @@ class Canvas extends React.Component {
       this.setState({ canvas: this.props.searchType });
     }
     //Update sorting algorithms
-    if (this.props.sortingState !== this.state.sortingState)
-      this.setState({ sortingState: this.props.sortingState });
+    if (this.props.sortingAlg !== this.state.sortingAlg) {
+      this.setState({ sortingAlg: this.props.sortingAlg });
+    }
   }
 
   renderContent() {
     // Render sorting algorithm canvas
     if (this.state.canvas === 'sorting') {
-      return <SortingCanvas selectedAlgorithms={this.state.sortingState} />;
+      return <SortingCanvas selectedAlgorithm={this.state.sortingAlg} />;
 
       // Render pathfinding algorithm campas
     } else if (this.state.canvas === 'pathfinding') {

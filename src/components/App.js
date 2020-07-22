@@ -11,10 +11,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    //Get all written sorting algorithms
-    const sArray = SortingAlgorithms.map((item) => item.checked);
-
-    this.state = { canvas: DEFAULT_CANVAS, sAlgs: sArray, pfAlgs: [] };
+    this.state = {
+      canvas: DEFAULT_CANVAS,
+      sortingAlg: SortingAlgorithms[0],
+      pfAlg: '',
+      active: false,
+    };
   }
 
   //Update Canvas Algorithm Type
@@ -24,10 +26,13 @@ class App extends React.Component {
 
   //Update Canvas Algorithms
   updateSortAlgs = (alg) => {
-    const sArray = this.state.sAlgs;
-    sArray[alg] = !sArray[alg];
+    this.setState({ sortingAlg: alg });
+  };
 
-    this.setState({ sAlgs: sArray });
+  runAlgorithm = () => {
+    this.setState({ active: !this.state.active }, () =>
+      console.log(this.state.active)
+    );
   };
 
   render() {
@@ -35,13 +40,14 @@ class App extends React.Component {
       <div className='structure'>
         <Sidebar
           canvasState={this.state}
-          radioFn={this.updateType}
-          sortCheckFn={this.updateSortAlgs}
+          updateType={this.updateType}
+          updateSort={this.updateSortAlgs}
+          runFn={this.runAlgorithm}
         />
         <div className='interface'>
           <Canvas
             searchType={this.state.canvas}
-            sortingState={this.state.sAlgs}
+            sortingAlg={this.state.sortingAlg}
           />
         </div>
       </div>
