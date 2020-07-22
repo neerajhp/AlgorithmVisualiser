@@ -12,4 +12,5 @@
   flex-grow: 0;
   background-color: teal;
   margin: 2px;
+  transition: height 0.4s linear;
 }

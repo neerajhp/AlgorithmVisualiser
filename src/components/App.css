@@ -10,5 +10,4 @@
   padding: 10px;
   flex-grow: 1;
   display: grid;
-  grid-template-rows: 80% auto;
 }

@@ -1,7 +1,6 @@
 import './SortCard.css';
 import React from 'react';
 import Graph from './Graph';
-import SelectionSort from './Algorithms/SelectionSort';
 class SortCard extends React.Component {
   constructor(props) {
     super(props);
@@ -9,8 +8,9 @@ class SortCard extends React.Component {
     this.state = {
       run: this.props.run,
       algorithm: this.props.algorithm,
-      enterArray: this.props.array,
-      leaveArray: this.props.array,
+      enterArray: [...this.props.array],
+      leaveArray: [...this.props.array],
+      func: this.props.func,
     };
   }
 
@@ -21,12 +21,11 @@ class SortCard extends React.Component {
   }
 
   updateGraph = (i, min) => {
-    console.log('Swapped ' + this.state.leaveArray);
-    var tmpArray = this.state.leaveArray;
+    const tmpArray = this.state.leaveArray;
     let tmp = tmpArray[i];
     tmpArray[i] = tmpArray[min];
     tmpArray[min] = tmp;
-
+    console.log('Update State');
     this.setState({ enterArray: this.state.leaveArray, leaveArray: tmpArray });
     return tmpArray;
   };

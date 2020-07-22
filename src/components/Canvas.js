@@ -25,7 +25,7 @@ class Canvas extends React.Component {
   renderContent() {
     // Render sorting algorithm canvas
     if (this.state.canvas === 'sorting') {
-      return <SortingCanvas algorithms={this.state.sortingState} />;
+      return <SortingCanvas selectedAlgorithms={this.state.sortingState} />;
 
       // Render pathfinding algorithm campas
     } else if (this.state.canvas === 'pathfinding') {

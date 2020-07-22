@@ -43,7 +43,6 @@ class App extends React.Component {
             searchType={this.state.canvas}
             sortingState={this.state.sAlgs}
           />
-          <ProgressBar />
         </div>
       </div>
     );

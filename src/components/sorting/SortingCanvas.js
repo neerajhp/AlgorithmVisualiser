@@ -3,14 +3,14 @@ import SortingAlgorithms from './Algorithms/AlgorithmList.js';
 import React from 'react';
 import SortCard from './SortCard';
 
-const SortingCanvas = ({ algorithms }) => {
+const SortingCanvas = ({ selectedAlgorithms }) => {
   //Create random array
-  const randArray = Array.from({ length: 5 }, () =>
+  const randArray = Array.from({ length: 20 }, () =>
     Math.floor(Math.random() * 100)
   );
 
   //Check if any algorithms selected
-  const selectionMade = !algorithms.every((alg) => {
+  const selectionMade = !selectedAlgorithms.every((alg) => {
     return !alg;
   });
 
@@ -22,13 +22,12 @@ const SortingCanvas = ({ algorithms }) => {
       <SortCard
         run={true}
         key={alg.name}
-        selected={algorithms[i]}
+        selected={selectedAlgorithms[i]}
         algorithm={alg}
         array={randArray}
       />
     ));
   }
-
   return <div className='sortingGrid'>{renderedItems}</div>;
 };
 

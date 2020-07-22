@@ -1,7 +1,4 @@
-import React from 'react';
-
 function SelectionSort(array, updateGraph) {
-  console.log(array);
   let tmpArray = array;
   let len = tmpArray.length;
   for (let i = 0; i < len; i++) {
