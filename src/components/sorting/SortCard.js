@@ -1,76 +1,41 @@
 import './SortCard.css';
 import React from 'react';
-import Graph from './Graph';
-class SortCard extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      run: this.props.run,
-      algorithm: this.props.algorithm,
-      enterArray: [...this.props.array],
-      leaveArray: [...this.props.array],
-      func: this.props.func,
-    };
-  }
+const SortCard = ({ algorithm, array }) => {
+  var graph = array[0];
+  var index_i = array[1];
+  var index_j = array[2];
 
-  componentDidMount() {
-    this.setState({ run: true });
-  }
+  // console.log(graph);
+  const renderedArray = (array) => {
+    return array.map((val, index) => {
+      var i = '';
+      var j = '';
+      j = index === index_j ? 'j' : '';
+      i = index === index_i ? 'i' : '';
 
-  componentDidUpdate() {
-    if (this.state.algorithm !== this.props.algorithm) {
-      this.setState({
-        algorithm: this.props.algorithm,
-        enterArray: [...this.props.array],
-        leaveArray: [...this.props.array],
-      });
-    }
-    if (this.state.run) {
-      this.setState({
-        run: this.state.algorithm.func(this.state.enterArray, this.updateGraph),
-      });
-    }
-  }
-
-  setStateSynchronous(stateUpdate) {
-    return new Promise((resolve) => {
-      this.setState(stateUpdate, () => resolve());
+      return (
+        <li
+          key={index}
+          style={{
+            height: val + '%',
+            width: 100 / array.length + '%',
+          }}
+          className={`vl ${i} ${j}`}
+        >
+          <i className='caret down icon ' />
+        </li>
+      );
     });
-  }
-
-  updateGraph = async (i, min) => {
-    console.log('Swap ');
-    const tmpArray = [...this.state.leaveArray];
-    // console.log('tmp Before ' + tmpArray);
-    let tmp = tmpArray[i];
-    tmpArray[i] = tmpArray[min];
-    tmpArray[min] = tmp;
-
-    // console.log('tmp After ' + tmpArray);
-    console.log('leave before ' + this.state.leaveArray);
-    await this.setStateSynchronous((state) => ({
-      enterArray: [...this.state.leaveArray],
-      leaveArray: [...tmpArray],
-    }));
-    console.log('leave after ' + this.state.leaveArray);
-
-    return tmpArray;
   };
 
-  render() {
-    console.log('Rendering ');
-    return (
-      <div className='ui segment sortCard'>
-        <div>{this.state.algorithm.label}</div>
-        <Graph
-          enterArray={this.state.enterArray}
-          leaveArray={this.state.leaveArray}
-        />
-        <div>Algorithm Info</div>
-      </div>
-    );
-  }
-}
+  return (
+    <div className='ui segment sortCard'>
+      <div>{algorithm.label}</div>
+      <ul className='graph'>{renderedArray(graph)}</ul>
+      <div>Algorithm Info</div>
+    </div>
+  );
+};
 
 export default SortCard;

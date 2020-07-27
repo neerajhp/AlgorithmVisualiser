@@ -48,15 +48,15 @@ button {
   outline: none;
 }
 
-i.icon {
+i.circle {
   transition: transform 0.2s !important; /* Animation */
 }
 
-i.icon:hover {
+i.circle:hover {
   transform: scale(1.2) !important;
   color: rgb(139, 243, 162);
 }
 
-i.icon:active {
+i.circle:active {
   transform: scale(1.1) !important;
 }

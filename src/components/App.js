@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import Sidebar from './Sidebar';
 import Canvas from './Canvas';
-import ProgressBar from './ProgressBar';
+// import ProgressBar from './ProgressBar';
 import SortingAlgorithms from './sorting/Algorithms/AlgorithmList';
 
 const DEFAULT_CANVAS = 'sorting';
@@ -35,6 +35,11 @@ class App extends React.Component {
     );
   };
 
+  reset() {
+    console.log('Resetting App ');
+    this.setState({ active: false });
+  }
+
   render() {
     return (
       <div className='structure'>
@@ -48,6 +53,8 @@ class App extends React.Component {
           <Canvas
             searchType={this.state.canvas}
             sortingAlg={this.state.sortingAlg}
+            active={this.state.active}
+            resetApp={() => this.reset()}
           />
         </div>
       </div>
