@@ -1,25 +1,27 @@
-const merge = (leftInd, rightInd, length, pointer) => {
+const merge = (leftInd, rightInd, length, isOdd, pointer) => {
   // Get last state from state list
-  let tmpArray = [...pointer.pop()[0]];
-  let j = 0;
-
-  // Iterate through left array
-  for (let i = 0; i <= length; i++) {
-    pointer.push([[...tmpArray], leftInd + i, rightInd + j]);
+  let tmpArray = [...pointer[pointer.length - 1][0]],
+    i = 0,
+    j = 0,
+    leftArrayEnd = length + isOdd,
+    rightArrayEnd = length;
+  // Iterate through left and right arrays
+  while (i < leftArrayEnd && j < rightArrayEnd) {
     if (tmpArray[leftInd + i] > tmpArray[rightInd + j]) {
       let tmp = tmpArray[rightInd + j];
-      // Copy section of left array
-      let shift = tmpArray.slice(leftInd + i, rightInd + j);
-      // Shift right by one
-      tmpArray.splice(leftInd + i + 1, shift.length, ...shift);
-      // Swap values
-      tmpArray[leftInd + i] = tmp;
-      //Handle overflow of left array
-      if (shift.length > length - i) {
-        length++;
+      let k = j;
+      //Shift section of left array to right
+      while (rightInd + k > leftInd + i) {
+        tmpArray[rightInd + k] = tmpArray[rightInd + k - 1];
+        k--;
       }
-      // Check if j index still in right array and increment
-      if (j <= length) j++;
+      tmpArray[leftInd + i] = tmp;
+      pointer.push([[...tmpArray], leftInd + i, rightInd + j]);
+      j++;
+      leftArrayEnd++;
+    } else {
+      pointer.push([[...tmpArray], leftInd + i, rightInd + j]);
+      i++;
     }
   }
 };
@@ -29,7 +31,6 @@ function mergeSortHelper(startIndex, length, pointer) {
   if (length <= 1) {
     return startIndex;
   }
-
   // Handle odd interval sizes
   let isOdd = length % 2 === 1 ? 1 : 0;
 
@@ -37,7 +38,7 @@ function mergeSortHelper(startIndex, length, pointer) {
     left = mergeSortHelper(startIndex, mid + isOdd, pointer),
     right = mergeSortHelper(startIndex + mid + isOdd, mid, pointer);
 
-  merge(left, right, mid + isOdd, pointer);
+  merge(left, right, mid, isOdd, pointer);
   return startIndex;
 }
 

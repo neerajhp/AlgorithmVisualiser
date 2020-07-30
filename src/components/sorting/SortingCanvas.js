@@ -4,7 +4,8 @@ import SortCard from './SortCard';
 import RandArray from '../utils/RandArray';
 import AlgorithmList from './Algorithms/AlgorithmList';
 
-const ARRAY_SIZE = 10;
+const ARRAY_SIZE = 40;
+const SORT_SPEED = 100;
 class SortingCanvas extends React.Component {
   constructor(props) {
     super(props);
@@ -51,7 +52,7 @@ class SortingCanvas extends React.Component {
       } else {
         this.setState({ op: this.state.op + 1 });
       }
-    }, 1000);
+    }, SORT_SPEED);
   }
 
   componentDidUpdate() {
@@ -76,7 +77,6 @@ class SortingCanvas extends React.Component {
   }
 
   render() {
-    console.log(this.state.active);
     return (
       <div className='sortingGrid'>
         <SortCard

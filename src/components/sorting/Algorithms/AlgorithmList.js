@@ -1,6 +1,9 @@
 import SelectionSort from './SelectionSort';
 import MergeSort from './MergeSort';
 import InsertionSort from './InsertionSort';
+import HeapSort from './HeapSort';
+import QuickSort from './QuickSort';
+import BinarySort from './BinarySort';
 
 export const SortingAlgorithms = [
   {
@@ -25,26 +28,26 @@ export const SortingAlgorithms = [
     name: 'quicksort',
     label: 'Quick Sort',
     stateList: [],
-    func: SelectionSort,
+    func: QuickSort,
   },
   {
     name: 'binarysort',
     label: 'Binary Sort',
     stateList: [],
-    func: SelectionSort,
+    func: BinarySort,
   },
   {
     name: 'heapsort',
     label: 'Heap Sort',
     stateList: [],
-    func: SelectionSort,
+    func: HeapSort,
   },
-  {
-    name: 'bubblesort',
-    label: 'Bubble Sort',
-    stateList: [],
-    func: SelectionSort,
-  },
+  // {
+  //   name: 'timsort',
+  //   label: 'Tim Sort',
+  //   stateList: [],
+  //   func: SelectionSort,
+  // },
 ];
 
 export default SortingAlgorithms;

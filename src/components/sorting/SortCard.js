@@ -11,8 +11,8 @@ const SortCard = ({ algorithm, array }) => {
     return array.map((val, index) => {
       var i = '';
       var j = '';
-      j = index === index_j ? 'j' : '';
-      i = index === index_i ? 'i' : '';
+      j = index === index_j ? 'caret down icon' : '';
+      i = index === index_i ? 'caret up icon' : '';
 
       return (
         <li
@@ -21,9 +21,10 @@ const SortCard = ({ algorithm, array }) => {
             height: val + '%',
             width: 100 / array.length + '%',
           }}
-          className={`vl ${i} ${j}`}
+          className={`vl`}
         >
-          <i className='caret down icon ' />
+          <i className='caret down icon' />
+          <i className='caret up icon' />
         </li>
       );
     });
