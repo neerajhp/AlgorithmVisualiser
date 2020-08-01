@@ -21,10 +21,10 @@ const SortCard = ({ algorithm, array }) => {
             height: val + '%',
             width: 100 / array.length + '%',
           }}
-          className={`vl`}
+          className={`vl ${j} ${i}`}
         >
-          <i className='caret down icon' />
-          <i className='caret up icon' />
+          <i className={`${j}`} />
+          <i className={`${i}`} />
         </li>
       );
     });
@@ -34,7 +34,7 @@ const SortCard = ({ algorithm, array }) => {
     <div className='ui segment sortCard'>
       <div>{algorithm.label}</div>
       <ul className='graph'>{renderedArray(graph)}</ul>
-      <div>Algorithm Info</div>
+      <div>Some info on the algorithm goes here</div>
     </div>
   );
 };

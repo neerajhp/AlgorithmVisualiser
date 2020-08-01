@@ -4,7 +4,7 @@ import PathfindingCanvas from './pathfinding/PathfindingCanvas';
 
 //Turn this into a component with states
 
-const Canvas = ({ searchType, sortingAlg, active, resetApp }) => {
+const Canvas = ({ searchType, sortingAlg, active, resetApp, container }) => {
   //Determine Canvas type
   var canvas = (
     <SortingCanvas
@@ -15,10 +15,10 @@ const Canvas = ({ searchType, sortingAlg, active, resetApp }) => {
   );
 
   if (searchType === 'pathfinding') {
-    canvas = <PathfindingCanvas />;
+    canvas = <PathfindingCanvas container={container} />;
   }
 
-  return <div className='ui segment'>{canvas}</div>;
+  return canvas;
 };
 
 export default Canvas;

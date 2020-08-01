@@ -1,7 +1,9 @@
+/* @import '../Palette.css'; */
+
 .sortCard {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   margin: 10px 10px !important;
   min-height: 30%;
   flex: 1 1 auto;
@@ -14,7 +16,7 @@
 .graph {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: flex-end;
   flex: 1 1 auto;
 }
@@ -22,60 +24,43 @@
 .vl {
   content: '';
   bottom: 0;
-  display: flex;
-  justify-content: center;
   flex-grow: 0;
-  background-color: teal;
+  background-color: var(--graph);
   margin: 2px;
   margin-bottom: 10px;
-  /* transition: height 0.4s linear; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 80% !important;
+}
+
+.vl .icon {
+  margin: 0 !important;
 }
 
 .vl.caret.down.icon {
+  background-color: var(--graph-selected);
+}
+.vl .caret.down.icon {
+  display: flex;
+  align-self: flex-start !important;
   display: block;
   position: relative;
   top: -20px;
 }
 
 .vl.caret.up.icon {
-  align-items: flex-end;
-  display: block;
-  position: relative;
-  bottom: -20px;
+  background-color: var(--graph-selected);
 }
-/* .vl i {
-  display: none;
-} */
-
-/* .vl .caret .up {
+.vl .caret.up.icon {
+  align-self: flex-end;
   display: block;
   position: relative;
-  bottom: -20px;
-} */
+  height: 0 !important;
+  bottom: -5px !important;
+}
+
 ul {
   list-style: none;
+  padding-inline-start: 0;
 }
-
-.j {
-  align-items: flex-start;
-}
-
-/* .i {
-  display: none;
-} */
-
-.j i {
-  display: block;
-  position: relative;
-  top: -20px;
-}
-
-/* .i {
-  align-items: flex-end;
-} */
-
-/* .i i {
-  display: block;
-  position: relative;
-  bottom: -20px;
-} */

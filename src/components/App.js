@@ -49,12 +49,13 @@ class App extends React.Component {
           updateSort={this.updateSortAlgs}
           runFn={this.runAlgorithm}
         />
-        <div className='interface'>
+        <div className='interface' ref={(e) => (this.interface = e)}>
           <Canvas
             searchType={this.state.canvas}
             sortingAlg={this.state.sortingAlg}
             active={this.state.active}
             resetApp={() => this.reset()}
+            container={this.interface}
           />
         </div>
       </div>
