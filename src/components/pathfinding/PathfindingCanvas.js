@@ -2,7 +2,7 @@ import React from 'react';
 import Node from './Node';
 import './PathfindingCanvas.css';
 
-const NODE_DIM = 25;
+const NODE_DIM = 40;
 class PathfindingCanvas extends React.Component {
   constructor(props) {
     super(props);
@@ -12,6 +12,7 @@ class PathfindingCanvas extends React.Component {
       origin: { x: 0, y: 0 },
       destination: { x: 0, y: 0 },
       nodeList: this.constructNodeList(this.props.container),
+      selectingObs: false,
     };
   }
 
@@ -32,13 +33,13 @@ class PathfindingCanvas extends React.Component {
 
   constructNodeList(dimensions) {
     // Get node max indices
-    const max_x = Math.floor(dimensions.clientWidth / NODE_DIM) - 1;
-    const max_y = Math.floor(dimensions.clientHeight / NODE_DIM) - 1;
+    const max_x = Math.floor(dimensions.clientWidth / NODE_DIM);
+    const max_y = Math.floor(dimensions.clientHeight / NODE_DIM);
     var list = [];
     for (let i = 0; i < max_x; i++) {
       list.push([]);
       for (let j = 0; j < max_y; j++) {
-        list[i].push(['']);
+        list[i].push('');
       }
     }
     return list;
@@ -52,45 +53,61 @@ class PathfindingCanvas extends React.Component {
       dimensions: {
         width: this.props.container.clientWidth,
         height: this.props.container.clientHeight,
+        onClickMode: 'setOrigin',
       },
       nodeList: [...nodeList],
     });
   };
 
   setOrigin = (node) => {
-    const newNodes = [...this.state.nodeList];
-    newNodes[this.state.origin.x][this.state.origin.y] = '';
-    newNodes[node.x][node.y] = 'origin';
-    this.setState({
-      origin: { x: node.x, y: node.y },
-      onClickMode: 'setDestination',
-    });
+    if (node !== undefined) {
+      const newNodes = [...this.state.nodeList];
+      newNodes[this.state.origin.x][this.state.origin.y] = '';
+      newNodes[node.x][node.y] = 'origin';
+      this.setState({
+        origin: { x: node.x, y: node.y },
+        onClickMode: 'setDestination',
+        nodeList: [...newNodes],
+      });
+    }
   };
 
   setDestination = (node) => {
-    const newNodes = [...this.state.nodeList];
-    newNodes[this.state.destination.x][this.state.destination.y] = '';
-    newNodes[node.x][node.y] = 'destination';
-    this.setState({
-      destination: { x: node.x, y: node.y },
-      onClickMode: 'setDestination',
-      nodeList: [...newNodes],
-    });
+    if (node !== undefined) {
+      const newNodes = [...this.state.nodeList];
+      newNodes[this.state.destination.x][this.state.destination.y] = '';
+      newNodes[node.x][node.y] = 'destination';
+      this.setState({
+        destination: { x: node.x, y: node.y },
+        onClickMode: 'setObstacle',
+        nodeList: [...newNodes],
+      });
+    }
   };
 
   setObstacle = (node) => {
-    this.setState(
-      {
-        obstacles: [...this.state.obstacles, ...[node.x, node.y]],
-      },
-      console.log(this.state.obstacles)
-    );
+    //Check origin and destination not overridden
+    if (
+      !['origin', 'destination'].includes(this.state.nodeList[node.x][node.y])
+    ) {
+      const newNodes = [...this.state.nodeList];
+      newNodes[node.x][node.y] = 'o';
+      this.setState({
+        nodeList: [...newNodes],
+      });
+    }
+  };
+
+  toggleObs = () => {
+    this.setState({
+      selectingObs: !this.state.selectingObs,
+    });
   };
 
   getOnClickFn() {
     if (this.state.onClickMode === 'setOrigin') return this.setOrigin;
     if (this.state.onClickMode === 'setDestination') return this.setDestination;
-    if (this.state.onClickMode === 'setObstacle') return this.setObstacle;
+    if (this.state.onClickMode === 'setObstacle') return this.toggleObs;
   }
 
   constructGrid(dimensions) {
@@ -105,8 +122,8 @@ class PathfindingCanvas extends React.Component {
       );
     }
     // Get node max indices
-    const max_x = Math.floor(dimensions.width / NODE_DIM) - 1;
-    const max_y = Math.floor(dimensions.height / NODE_DIM) - 1;
+    const max_x = Math.floor(dimensions.width / NODE_DIM);
+    const max_y = Math.floor(dimensions.height / NODE_DIM);
     //Map array
     const xArray = Array.from({ length: max_x }, (x, i) => i);
     const yArray = Array.from({ length: max_y }, (y, i) => i);
@@ -120,12 +137,19 @@ class PathfindingCanvas extends React.Component {
           xArray.map((x) => {
             var type = this.state.nodeList[x][y];
 
+            var selectingObs = this.state.selectingObs
+              ? this.setObstacle
+              : () => {
+                  return undefined;
+                };
+
             return (
               <Node
                 key={[x, y]}
                 x={x}
                 y={y}
                 onClickFn={this.getOnClickFn()}
+                onMouseOverFn={selectingObs}
                 nodeType={type}
               />
             );

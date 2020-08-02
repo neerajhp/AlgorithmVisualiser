@@ -6,7 +6,7 @@
   box-sizing: content-box;
   display: flex;
   flex-flow: row wrap;
-  border: 0.5px solid grey;
+  border: 0.1px solid grey;
 }
 
 .grid-square {
