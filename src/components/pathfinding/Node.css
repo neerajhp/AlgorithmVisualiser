@@ -1,22 +1,43 @@
 .node {
   box-sizing: border-box;
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   border: 0.1px solid grey;
+  -webkit-transition: background-color 0.5s ease-out;
 }
 
 .node:hover {
   background-color: var(--node-hover);
 }
 
-.node.origin {
-  background-color: var(--origin);
+.node:active:hover {
+  transform: scale(1.2);
 }
 
-.node.destination {
-  background-color: var(--destination);
+.scale:hover {
+  transform: scale(1.2);
 }
 
 .node.o {
   background-color: var(--o);
+}
+
+.node.queued {
+  background-color: var(--queued);
+}
+
+.node.visited {
+  background-color: var(--visited) !important;
+}
+
+.node.path {
+  background-color: var(--path) !important;
+}
+
+.node.origin {
+  background-color: var(--origin) !important ;
+}
+
+.node.destination {
+  background-color: var(--destination) !important;
 }

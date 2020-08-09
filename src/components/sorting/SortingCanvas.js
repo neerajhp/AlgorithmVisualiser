@@ -44,7 +44,7 @@ class SortingCanvas extends React.Component {
     return false;
   }
 
-  runSort() {
+  animate() {
     this.sim = setInterval(() => {
       if (this.checkState() || !this.state.active) {
         clearInterval(this.sim);
@@ -64,12 +64,13 @@ class SortingCanvas extends React.Component {
         op: 0,
         algorithms: AlgorithmList,
       });
+      //Sort array using selected algorithm
       this.sort(newArray);
     }
     if (this.state.active !== this.props.active) {
-      // Run Sorting visualiser
+      // Run Sorting animation
       if (!this.state.active) {
-        this.setState({ active: this.props.active }, () => this.runSort());
+        this.setState({ active: this.props.active }, () => this.animate());
       } else {
         this.setState({ active: this.props.active });
       }

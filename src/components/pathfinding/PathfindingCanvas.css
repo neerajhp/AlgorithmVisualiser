@@ -3,6 +3,7 @@
 }
 
 .grid {
+  top: 0;
   box-sizing: content-box;
   display: flex;
   flex-flow: row wrap;

@@ -1,12 +1,27 @@
 import React from 'react';
 import './Node.css';
 
-const Node = ({ x, y, onClickFn, onMouseOverFn, nodeType }) => {
+const Node = ({
+  x,
+  y,
+  onMouseDown,
+  onMouseUp,
+  onContext,
+  onMouseOverFn,
+  nodeType,
+  selecting,
+}) => {
+  let scale = selecting ? 'scale' : '';
   return (
     <div
-      className={`node ${nodeType}`}
-      onMouseDown={(e) => onClickFn()}
-      onMouseUp={(e) => onClickFn({ x, y })}
+      id={`square-${x}-${y}`}
+      className={`node ${nodeType} ${scale} `}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        onContext({ x, y });
+      }}
+      onMouseDown={(e) => onMouseDown({ x, y })}
+      onMouseUp={(e) => onMouseUp({ x, y })}
       onMouseOver={(e) => onMouseOverFn({ x, y })}
     ></div>
   );

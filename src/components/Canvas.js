@@ -15,7 +15,13 @@ const Canvas = ({ searchType, sortingAlg, active, resetApp, container }) => {
   );
 
   if (searchType === 'pathfinding') {
-    canvas = <PathfindingCanvas container={container} />;
+    canvas = (
+      <PathfindingCanvas
+        container={container}
+        active={active}
+        resetApp={() => resetApp()}
+      />
+    );
   }
 
   return canvas;
