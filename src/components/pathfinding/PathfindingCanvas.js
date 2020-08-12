@@ -16,14 +16,19 @@ class PathfindingCanvas extends React.Component {
         height: this.props.container.clientHeight,
       },
       onClickMode: 'setOrigin',
-      origin: { x: 0, y: 0 },
-      destination: { x: 0, y: 0 },
+      origin: { x: 5, y: 5 },
+      destination: { x: 10, y: 10 },
       nodeList: this.constructNodeList(this.props.container),
       selectingObs: false,
     };
   }
 
   componentDidMount() {
+    const max_x = Math.floor(this.state.dimensions.width / NODE_DIM) + 2;
+    const max_y = Math.floor(this.state.dimensions.height / NODE_DIM) + 2;
+    //Randomly assign origin
+    this.setOrigin(this.state.origin);
+    this.setDestination(this.state.destination);
     //Event listener for window resize
     window.addEventListener('resize', this.updateDimensions);
   }

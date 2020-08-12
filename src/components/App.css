@@ -11,7 +11,7 @@
   --graph-selected: #5468ff;
 
   /* Pathfinding Canvas */
-  --grid: #b3b3b3;
+  --grid: rgb(37, 187, 224);
   --grid-walk: #5e5c5c;
   --node-hover: #efefef;
   --origin: #00943ebb;
