@@ -1,6 +1,7 @@
 import './SidebarAccordion.css';
 import React from 'react';
 import SortingAlgorithms from './sorting/Algorithms/AlgorithmList';
+import PathfinderAlgorithms from './pathfinding/Algorithms/AlgorithmList';
 import { withStyles } from '@material-ui/core/styles';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
@@ -52,6 +53,7 @@ export default function SidebarAccordion({
   canvasState,
   updateType,
   updateSort,
+  updatePathfinder,
 }) {
   const [expanded, setExpanded] = React.useState('panel1');
 
@@ -102,6 +104,52 @@ export default function SidebarAccordion({
             Pathfinding Algorithms
           </div>
         </AccordionSummary>
+        <AccordionDetails>
+          <div className='pathfinding-info'>
+            <div className='ui list'>
+              {PathfinderAlgorithms.map((alg) => (
+                <React.Fragment key={alg.name}>
+                  <input
+                    type='radio'
+                    name='pathfinding-algorithms'
+                    id={alg.name}
+                    checked={alg === canvasState.pfAlg}
+                    onChange={(e) => updatePathfinder(alg)}
+                  />
+                  <label htmlFor={alg.name}>{alg.label}</label>
+                  <br />
+                </React.Fragment>
+              ))}
+            </div>
+
+            <div className='ui list nodes'>
+              <li>
+                <input type='button' name='origin' className='origin' />
+                <label htmlFor='origin'>Origin</label>
+              </li>
+              <li>
+                <input
+                  type='button'
+                  name='destination'
+                  className='destination'
+                />
+                <label htmlFor='destination'>Destination</label>
+              </li>
+              <li>
+                <input type='button' name='Obstacle' className='obstacle' />
+                <label htmlFor='Obstacle'>Obstacle</label>
+              </li>
+              <li>
+                <input type='button' name='Visited' className='visited' />
+                <label htmlFor='Visited'>Visited</label>
+              </li>
+              <li>
+                <input type='button' name='Queued' className='queued' />
+                <label htmlFor='Queued'>Queued</label>
+              </li>
+            </div>
+          </div>
+        </AccordionDetails>
       </Accordion>
     </div>
   );

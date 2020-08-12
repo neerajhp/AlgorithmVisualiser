@@ -20,4 +20,44 @@ input:hover + label {
 
 .list {
   margin-left: 5% !important;
+  display: inline-block;
+  width: max-content;
+}
+
+.pathfinding-info {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.nodes input[type='button'] {
+  display: inline-flex !important;
+  height: 2em;
+  width: 2em;
+  border: none;
+}
+
+.nodes input[type='button'] + label {
+  margin-left: 0.5em;
+}
+
+.nodes li {
+  display: flex !important;
+  align-items: center;
+  margin-top: 0.5em;
+}
+
+.origin {
+  background: var(--origin);
+}
+.destination {
+  background: var(--destination);
+}
+.obstacle {
+  background: var(--o);
+}
+.visited {
+  background: var(--visited);
+}
+.queued {
+  background: var(--queued);
 }

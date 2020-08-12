@@ -1,12 +1,13 @@
 import './SortCard.css';
 import React from 'react';
 
-const SortCard = ({ algorithm, array }) => {
+const SortCard = ({ algorithm, array, finished }) => {
   var graph = array[0];
   var index_i = array[1];
   var index_j = array[2];
 
-  // console.log(graph);
+  let sorted = finished ? 'sorted' : '';
+
   const renderedArray = (array) => {
     return array.map((val, index) => {
       var i = '';
@@ -21,7 +22,7 @@ const SortCard = ({ algorithm, array }) => {
             height: val + '%',
             width: 100 / array.length + '%',
           }}
-          className={`vl ${j} ${i}`}
+          className={`vl ${j} ${i} ${sorted}`}
         >
           <i className={`${j}`} />
           <i className={`${i}`} />

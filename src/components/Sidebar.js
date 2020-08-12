@@ -2,7 +2,13 @@ import './Sidebar.css';
 import React from 'react';
 import SidebarAccordion from './SidebarAccordion';
 
-const Sidebar = ({ canvasState, updateType, updateSort, runFn }) => {
+const Sidebar = ({
+  canvasState,
+  updateType,
+  updateSort,
+  updatePathfinder,
+  runFn,
+}) => {
   // Play icon
   var icon = 'play';
   if (canvasState.active) {
@@ -28,6 +34,7 @@ const Sidebar = ({ canvasState, updateType, updateSort, runFn }) => {
         canvasState={canvasState}
         updateType={updateType}
         updateSort={updateSort}
+        updatePathfinder={updatePathfinder}
       />
 
       <div className='control'>

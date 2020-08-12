@@ -2,8 +2,8 @@ import './App.css';
 import React from 'react';
 import Sidebar from './Sidebar';
 import Canvas from './Canvas';
-// import ProgressBar from './ProgressBar';
 import SortingAlgorithms from './sorting/Algorithms/AlgorithmList';
+import PathfinderAlgorithms from './pathfinding/Algorithms/AlgorithmList';
 
 const DEFAULT_CANVAS = 'sorting';
 
@@ -14,7 +14,7 @@ class App extends React.Component {
     this.state = {
       canvas: DEFAULT_CANVAS,
       sortingAlg: SortingAlgorithms[0],
-      pfAlg: '',
+      pfAlg: PathfinderAlgorithms[0],
       active: false,
     };
   }
@@ -27,6 +27,12 @@ class App extends React.Component {
   //Update Canvas Algorithms
   updateSortAlgs = (alg) => {
     this.setState({ sortingAlg: alg });
+  };
+
+  //Update Canvas Algorithms
+  updatePathfinderAlgs = (alg) => {
+    console.log(alg);
+    this.setState({ pfAlg: alg });
   };
 
   runAlgorithm = () => {
@@ -47,6 +53,7 @@ class App extends React.Component {
           canvasState={this.state}
           updateType={this.updateType}
           updateSort={this.updateSortAlgs}
+          updatePathfinder={this.updatePathfinderAlgs}
           runFn={this.runAlgorithm}
         />
         <div className='interface' ref={(e) => (this.interface = e)}>
