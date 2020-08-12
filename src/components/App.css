@@ -1,3 +1,26 @@
+#root {
+  --theme-base: #7383ff;
+  /* Sidebar */
+  --sidebar-background: white;
+  --sidebar-text: grey;
+  --sidebar-text-active: black;
+
+  /* Sorting Canvas*/
+  --graph: #b4b3b3;
+  --graph-selected: #5468ff;
+
+  /* Pathfinding Canvas */
+  --grid: #b3b3b3;
+  --grid-walk: #5e5c5c;
+  --node-hover: #efefef;
+  --origin: #00943ebb;
+  --destination: #ff3b3f;
+  --o: #5e5c5c;
+  --visited: rgb(28, 185, 223);
+  --queued: rgb(253, 253, 186);
+  --path: #5468ff;
+}
+
 .structure {
   height: 100vh;
   width: 100vw;
@@ -14,19 +37,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.structure {
-  /* Sorting Canvas*/
-  --graph: #a9a9a9;
-  --graph-selected: #026670;
-
-  /* Pathfinding Canvas */
-  --node-hover: #efefef;
-  --origin: #caebf2;
-  --destination: #ff3b3f;
-  --o: #a9a9a9;
-  --visited: blue;
-  --queued: yellow;
-  --path: purple;
 }

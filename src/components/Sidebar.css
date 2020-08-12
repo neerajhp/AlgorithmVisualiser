@@ -1,33 +1,29 @@
-.title {
-  color: grey !important;
+.ui.inverted.menu {
+  background: var(--sidebar-background) !important;
+  color: var(--sidebar-text) !important;
+  box-shadow: 1px 1px 20px 1px grey !important;
 }
 
-.ui.list {
-  transition: all 2s ease-in-out !important;
+.header {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  font-family: 'Major Mono Display', monospace;
+  font-size: 2em;
+  text-align: center;
+  margin-top: 0.5em;
 }
 
-.active {
-  color: whitesmoke !important;
-}
-
-input {
-  display: none !important;
-}
-
-input + label {
-  color: grey !important;
-}
-
-input:checked + label {
-  color: white !important;
-}
-
-input:hover + label {
-  color: white !important;
-}
-
-.list {
-  margin-left: 5% !important;
+.header::after {
+  content: '';
+  background: url('../resources/header-bkg.png');
+  background-size: cover;
+  transform: scaleX(-1);
+  opacity: 0.3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
 }
 
 .control {
@@ -38,25 +34,53 @@ input:hover + label {
   bottom: 0;
   height: 15%;
   width: 100%;
-  box-shadow: 0px -1px 1px rgba(128, 128, 128, 0.75);
 }
 
 button {
-  transform: translateY(-50%);
-  background-color: Transparent;
-  border: none;
-  outline: none;
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  border-radius: 0.5rem;
+  font-family: 'Avenir Next';
+  font-size: 1rem;
+  padding: 0.5rem 3rem;
+  color: white;
+  border: solid 3px transparent;
+  background-image: -webkit-linear-gradient(left, #7383ff, #5468ff, #7383ff);
+  background-origin: border-box;
 }
 
-i.circle {
-  transition: transform 0.2s !important; /* Animation */
+button:hover {
+  -webkit-transition: background 0.5s ease-out;
+  background-position: 166px;
 }
 
-i.circle:hover {
-  transform: scale(1.2) !important;
-  color: rgb(139, 243, 162);
+/* Credit to  https://fdossena.com/?p=html5cool/buttons/i.frag */
+.bouncy {
+  animation: bouncy 5s infinite linear;
+  position: relative;
 }
 
-i.circle:active {
-  transform: scale(1.1) !important;
+@keyframes bouncy {
+  0% {
+    top: 0em;
+  }
+  40% {
+    top: 0em;
+  }
+  43% {
+    top: -0.9em;
+  }
+  46% {
+    top: 0em;
+  }
+  48% {
+    top: -0.4em;
+  }
+  50% {
+    top: 0em;
+  }
+  100% {
+    top: 0em;
+  }
 }

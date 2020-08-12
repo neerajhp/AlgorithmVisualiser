@@ -26,7 +26,11 @@ class SortingCanvas extends React.Component {
   sort(array) {
     AlgorithmList.forEach((alg) => {
       alg.stateList = [[array, 0, 1]];
+      //time execution
+      let start = performance.now();
       alg.func(alg.stateList);
+      let end = performance.now();
+      alg.perf = end - start;
       //Indicate array is sorted
       alg.stateList.push(0);
     });
@@ -57,15 +61,11 @@ class SortingCanvas extends React.Component {
 
   componentDidUpdate() {
     if (this.state.selectedAlgorithm !== this.props.selectedAlgorithm) {
-      var newArray = RandArray(ARRAY_SIZE);
       this.setState({
         selectedAlgorithm: this.props.selectedAlgorithm,
-        array: newArray,
         op: 0,
         algorithms: AlgorithmList,
       });
-      //Sort array using selected algorithm
-      this.sort(newArray);
     }
     if (this.state.active !== this.props.active) {
       // Run Sorting animation

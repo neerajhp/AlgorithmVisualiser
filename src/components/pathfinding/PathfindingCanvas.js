@@ -3,8 +3,8 @@ import Node from './Node';
 import './PathfindingCanvas.css';
 import BFS from './Algorithms/BFS';
 
-const NODE_DIM = 30;
-const SORT_SPEED = 20;
+const NODE_DIM = 40;
+const SORT_SPEED = 30;
 class PathfindingCanvas extends React.Component {
   constructor(props) {
     super(props);

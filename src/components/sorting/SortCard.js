@@ -32,9 +32,8 @@ const SortCard = ({ algorithm, array }) => {
 
   return (
     <div className='ui segment sortCard'>
-      <div>{algorithm.label}</div>
+      <div className='card-header'>{algorithm.label}</div>
       <ul className='graph'>{renderedArray(graph)}</ul>
-      <div>Some info on the algorithm goes here</div>
     </div>
   );
 };

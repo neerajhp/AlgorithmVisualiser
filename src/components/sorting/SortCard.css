@@ -1,4 +1,7 @@
-/* @import '../Palette.css'; */
+.card-header {
+  font-family: Monofett, cursive;
+  font-size: 2em;
+}
 
 .sortCard {
   display: flex;
@@ -14,6 +17,7 @@
 }
 
 .graph {
+  margin-top: 2em;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
