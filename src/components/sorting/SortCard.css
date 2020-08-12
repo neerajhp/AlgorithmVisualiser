@@ -1,7 +1,12 @@
+.card-header {
+  font-family: Monofett, cursive;
+  font-size: 2em;
+}
+
 .sortCard {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   margin: 10px 10px !important;
   min-height: 30%;
   flex: 1 1 auto;
@@ -9,4 +14,57 @@
 
 .inactive {
   display: none;
+}
+
+.graph {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex: 1 1 auto;
+}
+
+.vl {
+  content: '';
+  bottom: 0;
+  flex-grow: 0;
+  background-color: var(--graph);
+  margin: 2px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 80% !important;
+}
+
+.vl .icon {
+  margin: 0 !important;
+}
+
+.vl.caret.down.icon {
+  background-color: var(--graph-selected);
+}
+.vl .caret.down.icon {
+  display: flex;
+  align-self: flex-start !important;
+  display: block;
+  position: relative;
+  top: -20px;
+}
+
+.vl.caret.up.icon {
+  background-color: var(--graph-selected);
+}
+.vl .caret.up.icon {
+  align-self: flex-end;
+  display: block;
+  position: relative;
+  height: 0 !important;
+  bottom: -5px !important;
+}
+
+ul {
+  list-style: none;
+  padding-inline-start: 0;
 }

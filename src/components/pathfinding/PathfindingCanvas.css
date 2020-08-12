@@ -1,0 +1,11 @@
+.canvas {
+  height: 100%;
+}
+
+.grid {
+  top: 0;
+  box-sizing: content-box;
+  display: flex;
+  flex-flow: row wrap;
+  border: 0.1em solid var(--grid);
+}

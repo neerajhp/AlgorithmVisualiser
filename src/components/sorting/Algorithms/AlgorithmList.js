@@ -1,62 +1,59 @@
 import SelectionSort from './SelectionSort';
+import MergeSort from './MergeSort';
+import InsertionSort from './InsertionSort';
+import HeapSort from './HeapSort';
+import QuickSort from './QuickSort';
+import BinarySort from './BinarySort';
 
 export const SortingAlgorithms = [
   {
     name: 'selectionsort',
     label: 'Selection Sort',
-    checked: true,
-    func: function (a, b) {
-      SelectionSort(a, b);
-    },
+    stateList: [],
+    perf: '',
+    func: SelectionSort,
   },
   {
     name: 'mergesort',
     label: 'Merge Sort',
-    checked: false,
-    func: function (a, b) {
-      console.log('Run merge sort');
-    },
+    stateList: [],
+    perf: '',
+    func: MergeSort,
   },
   {
     name: 'insertionsort',
     label: 'Insertion Sort',
-    checked: false,
-    func: function (a, b) {
-      console.log('Run insertion sort');
-    },
+    stateList: [],
+    perf: '',
+    func: InsertionSort,
   },
   {
     name: 'quicksort',
     label: 'Quick Sort',
-    checked: false,
-    func: function (a, b) {
-      console.log('Run quick sort');
-    },
+    stateList: [],
+    perf: '',
+    func: QuickSort,
   },
   {
     name: 'binarysort',
     label: 'Binary Sort',
-    checked: false,
-    func: function (a, b) {
-      console.log('Run binary sort');
-    },
+    stateList: [],
+    perf: '',
+    func: BinarySort,
   },
   {
     name: 'heapsort',
     label: 'Heap Sort',
-    checked: false,
-    func: function (a, b) {
-      console.log('Run heap sort');
-    },
+    stateList: [],
+    perf: '',
+    func: HeapSort,
   },
-  {
-    name: 'bubblesort',
-    label: 'Bubble Sort',
-    checked: false,
-    func: function (a, b) {
-      console.log('Run bubble sort');
-    },
-  },
+  // {
+  //   name: 'timsort',
+  //   label: 'Tim Sort',
+  //   stateList: [],
+  //   func: SelectionSort,
+  // },
 ];
 
 export default SortingAlgorithms;

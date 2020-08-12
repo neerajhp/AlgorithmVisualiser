@@ -1,47 +1,39 @@
 import './Sidebar.css';
 import React from 'react';
-import Checkbox from './Checkbox';
-import SortingAlgorithms from './sorting/Algorithms/AlgorithmList';
+import SidebarAccordion from './SidebarAccordion';
 
-const Sidebar = ({ canvasState, radioFn, sortCheckFn }) => {
-  const updateType = radioFn;
-  const updateSort = sortCheckFn;
-  const selectedSortAlgs = canvasState.sAlgs;
+const Sidebar = ({ canvasState, updateType, updateSort, runFn }) => {
+  // Play icon
+  var icon = 'play';
+  if (canvasState.active) {
+    icon = 'pause';
+  }
 
   return (
-    //Function to update algorithm type {Sorting, Pathfinding}
     <div className='ui left visible sidebar inverted vertical menu'>
       <div className='header'>
-        <input
-          type='radio'
-          name='type'
-          id='sorting'
-          checked={'sorting' === canvasState.canvas}
-          onChange={(e) => updateType(e.target.id)}
-        />
-        <label htmlFor='sorting'>Sorting Algorithms</label>
+        <p>{'{'}</p>
+        <p>
+          Algorithm <br />
+          Visualiser
+        </p>
+        <p>
+          <br />
+          {'}'}
+        </p>
+      </div>
 
-        <div className='ui list'>
-          {SortingAlgorithms.map((alg, i) => (
-            <Checkbox
-              key={alg.name}
-              algorithm={alg}
-              checked={selectedSortAlgs[i]}
-              updateFn={() => updateSort(i)}
-            />
-          ))}
-        </div>
+      {/* Material UI Customised Accordion component */}
+      <SidebarAccordion
+        canvasState={canvasState}
+        updateType={updateType}
+        updateSort={updateSort}
+      />
 
-        <br />
-
-        <input
-          type='radio'
-          name='type'
-          id='pathfinding'
-          checked={'pathfinding' === canvasState.canvas}
-          onChange={(e) => updateType(e.target.id)}
-        />
-        <label htmlFor='pathfinding'>Pathfinding Algorithms</label>
+      <div className='control'>
+        <button className='bouncy' onClick={() => runFn()}>
+          Visualise!
+        </button>
       </div>
     </div>
   );

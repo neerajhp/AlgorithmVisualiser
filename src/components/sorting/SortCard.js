@@ -1,50 +1,41 @@
 import './SortCard.css';
 import React from 'react';
-import Graph from './Graph';
-class SortCard extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      run: this.props.run,
-      algorithm: this.props.algorithm,
-      enterArray: [...this.props.array],
-      leaveArray: [...this.props.array],
-      func: this.props.func,
-    };
-  }
+const SortCard = ({ algorithm, array }) => {
+  var graph = array[0];
+  var index_i = array[1];
+  var index_j = array[2];
 
-  componentDidMount() {
-    if (this.state.run) {
-      this.state.algorithm.func(this.state.enterArray, this.updateGraph);
-    }
-  }
+  // console.log(graph);
+  const renderedArray = (array) => {
+    return array.map((val, index) => {
+      var i = '';
+      var j = '';
+      j = index === index_j ? 'caret down icon' : '';
+      i = index === index_i ? 'caret up icon' : '';
 
-  updateGraph = (i, min) => {
-    const tmpArray = this.state.leaveArray;
-    let tmp = tmpArray[i];
-    tmpArray[i] = tmpArray[min];
-    tmpArray[min] = tmp;
-    console.log('Update State');
-    this.setState({ enterArray: this.state.leaveArray, leaveArray: tmpArray });
-    return tmpArray;
+      return (
+        <li
+          key={index}
+          style={{
+            height: val + '%',
+            width: 100 / array.length + '%',
+          }}
+          className={`vl ${j} ${i}`}
+        >
+          <i className={`${j}`} />
+          <i className={`${i}`} />
+        </li>
+      );
+    });
   };
 
-  render() {
-    const inactive = this.props.selected ? '' : 'inactive';
-
-    return (
-      <div className={`ui segment sortCard ${inactive}`}>
-        <div>{this.state.algorithm.label}</div>
-        <Graph
-          algorithm={this.state.algorithm}
-          enterArray={this.state.enterArray}
-          leaveArray={this.state.leaveArray}
-        />
-        <div>Algorithm Info</div>
-      </div>
-    );
-  }
-}
+  return (
+    <div className='ui segment sortCard'>
+      <div className='card-header'>{algorithm.label}</div>
+      <ul className='graph'>{renderedArray(graph)}</ul>
+    </div>
+  );
+};
 
 export default SortCard;

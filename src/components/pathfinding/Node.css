@@ -1,0 +1,63 @@
+.node {
+  box-sizing: border-box;
+  height: 40px;
+  width: 40px;
+  border: 0.1em solid var(--grid);
+  transition: background-color 0.5s ease-out;
+}
+
+.node:hover {
+  background-color: var(--node-hover);
+}
+
+.node:active:hover {
+  transform: scale(1.2);
+}
+
+.scale:hover {
+  transform: scale(1.2);
+}
+
+.node.o {
+  background-color: var(--o);
+}
+
+.node.queued {
+  background-color: var(--queued);
+}
+
+.node.visited {
+  background-color: var(--visited) !important;
+  animation: 0.4s walking;
+  animation-iteration-count: 1;
+}
+
+.node.path {
+  background-color: var(--path) !important;
+  animation: 1s walking;
+  animation-iteration-count: 1;
+}
+
+.node.origin {
+  background-color: var(--origin) !important ;
+}
+
+.node.destination {
+  background-color: var(--destination) !important;
+}
+
+@keyframes walking {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+    border: 0.2em solid var(--grid);
+    border-radius: 0.5em;
+  }
+  10% {
+    transform: scale(1);
+    border: 0.1em solid var(--grid);
+    border-radius: 0em;
+  }
+}

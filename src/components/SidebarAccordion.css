@@ -1,0 +1,23 @@
+.active {
+  color: var(--sidebar-text-active);
+}
+
+input {
+  display: none !important;
+}
+
+input + label {
+  color: var(--sidebar-text);
+}
+
+input:checked + label {
+  color: var(--sidebar-text-active) !important;
+}
+
+input:hover + label {
+  color: var(--sidebar-text-active) !important;
+}
+
+.list {
+  margin-left: 5% !important;
+}
