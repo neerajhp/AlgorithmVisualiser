@@ -53,6 +53,10 @@
   top: -20px;
 }
 
+.sorted {
+  background-color: var(--graph-sorted) !important;
+}
+
 .vl.caret.up.icon {
   background-color: var(--graph-selected);
 }

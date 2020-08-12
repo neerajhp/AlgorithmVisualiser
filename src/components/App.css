@@ -2,11 +2,12 @@
   --theme-base: #7383ff;
   /* Sidebar */
   --sidebar-background: white;
-  --sidebar-text: grey;
-  --sidebar-text-active: black;
+  --sidebar-text: #4e4e4e;
+  --sidebar-text-active: #5468ff;
 
   /* Sorting Canvas*/
   --graph: #b4b3b3;
+  --graph-sorted: rgb(28, 185, 223);
   --graph-selected: #5468ff;
 
   /* Pathfinding Canvas */

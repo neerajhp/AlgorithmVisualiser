@@ -34,7 +34,6 @@ class SortingCanvas extends React.Component {
       //Indicate array is sorted
       alg.stateList.push(0);
     });
-    console.log(AlgorithmList);
   }
 
   reset() {
@@ -42,6 +41,7 @@ class SortingCanvas extends React.Component {
   }
 
   checkState() {
+    //Sort finished
     if (this.state.selectedAlgorithm.stateList[this.state.op + 1] === 0) {
       return true;
     }
@@ -83,6 +83,7 @@ class SortingCanvas extends React.Component {
         <SortCard
           algorithm={this.state.selectedAlgorithm}
           array={this.state.selectedAlgorithm.stateList[this.state.op]}
+          finished={this.checkState()}
         />
       </div>
     );
