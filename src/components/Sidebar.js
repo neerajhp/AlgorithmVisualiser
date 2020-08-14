@@ -14,7 +14,7 @@ const Sidebar = ({
   //Button labels
   var buttonLabel = 'Visualise!';
   if (canvasState.active) {
-    buttonLabel = 'Take a pause';
+    buttonLabel = 'Pause animation';
   }
 
   var resetLabel = 'Reset canvas';
