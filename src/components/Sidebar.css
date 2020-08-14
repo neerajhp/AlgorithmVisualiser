@@ -29,9 +29,10 @@
 .control {
   position: absolute;
   display: flex;
+  flex-flow: column nowrap;
   justify-content: center;
-  align-items: flex-start;
-  bottom: 0;
+  align-items: center;
+  bottom: 2%;
   height: 15%;
   width: 100%;
 }
@@ -44,13 +45,26 @@ button {
   font-family: 'Avenir Next';
   font-size: 1rem;
   padding: 0.5rem 3rem;
+  margin-bottom: 0.5em;
   color: white;
   border: solid 3px transparent;
-  background-image: -webkit-linear-gradient(left, #7383ff, #5468ff, #7383ff);
   background-origin: border-box;
 }
 
-button:hover {
+.reset {
+  background-image: -webkit-linear-gradient(
+    left,
+    #b4b3b3,
+    rgb(134, 134, 134),
+    #b4b3b3
+  );
+}
+
+.bouncy {
+  background-image: -webkit-linear-gradient(left, #7383ff, #5468ff, #7383ff);
+}
+
+button:hover .bouncy {
   -webkit-transition: background 0.5s ease-out;
   background-position: 166px;
 }

@@ -15,7 +15,7 @@ class PathfindingCanvas extends React.Component {
         width: this.props.container.clientWidth,
         height: this.props.container.clientHeight,
       },
-      onClickMode: 'setOrigin',
+      onClickMode: this.props.nodeClickMode,
       origin: { x: 5, y: 5 },
       destination: { x: 10, y: 10 },
       nodeList: this.constructNodeList(this.props.container),
@@ -34,6 +34,9 @@ class PathfindingCanvas extends React.Component {
   }
 
   componentDidUpdate() {
+    if (this.state.onClickMode !== this.props.nodeClickMode) {
+      this.setState({ onClickMode: this.props.nodeClickMode });
+    }
     if (this.state.active !== this.props.active) {
       // Run visualiser
       if (!this.state.active) {
@@ -69,7 +72,6 @@ class PathfindingCanvas extends React.Component {
       dimensions: {
         width: this.props.container.clientWidth,
         height: this.props.container.clientHeight,
-        onClickMode: 'setOrigin',
       },
       nodeList: [...nodeList],
     });
@@ -82,7 +84,6 @@ class PathfindingCanvas extends React.Component {
       newNodes[node.x][node.y] = 'origin';
       this.setState({
         origin: { x: node.x, y: node.y },
-        onClickMode: 'setObstacle',
         nodeList: [...newNodes],
       });
     }
@@ -95,7 +96,6 @@ class PathfindingCanvas extends React.Component {
       newNodes[node.x][node.y] = 'destination';
       this.setState({
         destination: { x: node.x, y: node.y },
-        onClickMode: 'setObstacle',
         nodeList: [...newNodes],
       });
     }
@@ -122,7 +122,9 @@ class PathfindingCanvas extends React.Component {
       this.setState({
         selectingObs: false,
       });
-    else return this.setOrigin(node);
+    else if (this.state.onClickMode === 'setOrigin') this.setOrigin(node);
+    else if (this.state.onClickMode === 'setDestination')
+      this.setDestination(node);
   };
 
   mouseDownHandler = (node) => {
@@ -156,10 +158,12 @@ class PathfindingCanvas extends React.Component {
     //Animate through list of explored nodes
     let step = 1;
     this.sim = setInterval(() => {
-      if (step > stateList.length - 1) {
+      // Check if reached animation end or paused
+      if (step > stateList.length - 1 || !this.state.active) {
         clearInterval(this.sim);
-        this.props.resetApp();
+        //this.props.resetApp();
       } else {
+        // Go to next expanded node
         let node = stateList[step][0];
         document
           .getElementById(`square-${node.x}-${node.y}`)

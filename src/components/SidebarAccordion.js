@@ -54,6 +54,7 @@ export default function SidebarAccordion({
   updateType,
   updateSort,
   updatePathfinder,
+  setNodeType,
 }) {
   const [expanded, setExpanded] = React.useState('panel1');
 
@@ -123,30 +124,43 @@ export default function SidebarAccordion({
             </div>
 
             <div className='ui list nodes'>
-              <li>
-                <input type='button' name='origin' className='origin' />
-                <label htmlFor='origin'>Origin</label>
-              </li>
-              <li>
-                <input
-                  type='button'
-                  name='destination'
-                  className='destination'
-                />
-                <label htmlFor='destination'>Destination</label>
-              </li>
-              <li>
-                <input type='button' name='Obstacle' className='obstacle' />
-                <label htmlFor='Obstacle'>Obstacle</label>
-              </li>
-              <li>
-                <input type='button' name='Visited' className='visited' />
-                <label htmlFor='Visited'>Visited</label>
-              </li>
-              <li>
-                <input type='button' name='Queued' className='queued' />
-                <label htmlFor='Queued'>Queued</label>
-              </li>
+              <ul>
+                <li className='setter' onClick={() => setNodeType('setOrigin')}>
+                  <div className='origin node' />
+                  <label htmlFor='origin'>Origin</label>
+                  <div className='setter-icon'>
+                    set<i className='triangle right icon'></i>
+                  </div>
+                </li>
+                <li
+                  className='setter'
+                  onClick={(e) => setNodeType('setDestination')}
+                >
+                  <div className='destination node' />
+                  <label htmlFor='destination'>Destination</label>
+                  <div className='setter-icon'>
+                    set<i className='triangle right icon'></i>
+                  </div>
+                </li>
+                <li
+                  className='setter'
+                  onClick={(e) => setNodeType('setObstacle')}
+                >
+                  <div className='obstacle node' />
+                  <label htmlFor='Obstacle'>Obstacle</label>
+                  <div className='setter-icon'>
+                    set<i className='triangle right icon'></i>
+                  </div>
+                </li>
+                <li>
+                  <div className='visited node' />
+                  <label htmlFor='Visited'>Visited</label>
+                </li>
+                <li>
+                  <div className='queued node' />
+                  <label htmlFor='Queued'>Queued</label>
+                </li>
+              </ul>
             </div>
           </div>
         </AccordionDetails>

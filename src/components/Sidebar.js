@@ -7,12 +7,19 @@ const Sidebar = ({
   updateType,
   updateSort,
   updatePathfinder,
+  nodeClickFn,
   runFn,
+  resetFn,
 }) => {
-  // Play icon
-  var icon = 'play';
+  //Button labels
+  var buttonLabel = 'Visualise!';
   if (canvasState.active) {
-    icon = 'pause';
+    buttonLabel = 'Take a pause';
+  }
+
+  var resetLabel = 'Reset canvas';
+  if (canvasState.canvas === 'sorting') {
+    resetLabel = 'New Array';
   }
 
   return (
@@ -35,11 +42,15 @@ const Sidebar = ({
         updateType={updateType}
         updateSort={updateSort}
         updatePathfinder={updatePathfinder}
+        setNodeType={nodeClickFn}
       />
 
       <div className='control'>
         <button className='bouncy' onClick={() => runFn()}>
-          Visualise!
+          {buttonLabel}
+        </button>
+        <button className='reset' onClick={() => resetFn()}>
+          {resetLabel}
         </button>
       </div>
     </div>

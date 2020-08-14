@@ -1,11 +1,15 @@
 import './App.css';
 import React from 'react';
 import Sidebar from './Sidebar';
-import Canvas from './Canvas';
+import SortingCanvas from './sorting/SortingCanvas';
+import PathfindingCanvas from './pathfinding/PathfindingCanvas';
 import SortingAlgorithms from './sorting/Algorithms/AlgorithmList';
 import PathfinderAlgorithms from './pathfinding/Algorithms/AlgorithmList';
+import RandArray from './utils/RandArray';
 
 const DEFAULT_CANVAS = 'sorting';
+const ARRAY_SIZE = 40;
+const SORT_SPEED = 80;
 
 class App extends React.Component {
   constructor(props) {
@@ -14,8 +18,11 @@ class App extends React.Component {
     this.state = {
       canvas: DEFAULT_CANVAS,
       sortingAlg: SortingAlgorithms[0],
+      sortingArray: RandArray(ARRAY_SIZE),
       pfAlg: PathfinderAlgorithms[0],
+      nodeClickMode: 'setOrigin',
       active: false,
+      speed: SORT_SPEED,
     };
   }
 
@@ -31,8 +38,11 @@ class App extends React.Component {
 
   //Update Canvas Algorithms
   updatePathfinderAlgs = (alg) => {
-    console.log(alg);
     this.setState({ pfAlg: alg });
+  };
+
+  setNodeType = (type) => {
+    this.setState({ nodeClickMode: type });
   };
 
   runAlgorithm = () => {
@@ -41,9 +51,43 @@ class App extends React.Component {
     );
   };
 
-  reset() {
-    console.log('Resetting App ');
+  pause = () => {
     this.setState({ active: false });
+  };
+
+  resetCanvas = () => {
+    if (this.state.canvas === 'sorting') {
+      this.setState({ active: false, sortingArray: RandArray(ARRAY_SIZE) });
+    }
+    if (this.state.canvas === 'pathfinding') {
+      //Clear nodeList
+    }
+  };
+
+  getCanvas(container) {
+    //Determine Canvas type
+    var canvas = (
+      <SortingCanvas
+        selectedAlgorithm={this.state.sortingAlg}
+        array={this.state.sortingArray}
+        active={this.state.active}
+        pauseApp={() => this.pause()}
+        speed={this.state.speed}
+      />
+    );
+
+    if (this.state.canvas === 'pathfinding') {
+      canvas = (
+        <PathfindingCanvas
+          container={container}
+          active={this.state.active}
+          nodeClickMode={this.state.nodeClickMode}
+          pauseApp={() => this.pause()}
+        />
+      );
+    }
+
+    return canvas;
   }
 
   render() {
@@ -54,16 +98,12 @@ class App extends React.Component {
           updateType={this.updateType}
           updateSort={this.updateSortAlgs}
           updatePathfinder={this.updatePathfinderAlgs}
+          nodeClickFn={this.setNodeType}
           runFn={this.runAlgorithm}
+          resetFn={this.resetCanvas}
         />
         <div className='interface' ref={(e) => (this.interface = e)}>
-          <Canvas
-            searchType={this.state.canvas}
-            sortingAlg={this.state.sortingAlg}
-            active={this.state.active}
-            resetApp={() => this.reset()}
-            container={this.interface}
-          />
+          {this.getCanvas(this.interface)}
         </div>
       </div>
     );

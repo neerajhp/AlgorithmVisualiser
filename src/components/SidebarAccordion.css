@@ -20,30 +20,27 @@ input:hover + label {
 
 .list {
   margin-left: 5% !important;
-  display: inline-block;
-  width: max-content;
+  width: 100%;
 }
 
 .pathfinding-info {
   display: flex;
   flex-flow: column nowrap;
-}
-
-.nodes input[type='button'] {
-  display: inline-flex !important;
-  height: 2em;
-  width: 2em;
-  border: none;
-}
-
-.nodes input[type='button'] + label {
-  margin-left: 0.5em;
+  width: 80%;
 }
 
 .nodes li {
   display: flex !important;
-  align-items: center;
+  width: 100%;
   margin-top: 0.5em;
+  align-items: center;
+}
+
+.ui .list .node {
+  height: 2em;
+  width: 2em;
+  border: none;
+  margin-right: 5%;
 }
 
 .origin {
@@ -60,4 +57,44 @@ input:hover + label {
 }
 .queued {
   background: var(--queued);
+}
+
+.setter:hover {
+  background-color: #efefef;
+}
+
+.setter:hover i {
+  transition: 0.2s ease;
+  transform: translateX(0.4em);
+}
+
+.setter:active {
+  background-color: #b1b1b1;
+}
+
+.setter-icon {
+  margin-left: auto;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateX(0em);
+  }
+  40% {
+    transform: translateX(0.6em);
+  }
+  50% {
+    transform: translateX(0em);
+  }
+  60% {
+  }
+  75% {
+    transform: translateX(0em);
+  }
+  90% {
+    transform: translateX(0.2em);
+  }
+  100% {
+    transform: translateX(0em);
+  }
 }
