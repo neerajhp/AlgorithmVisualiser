@@ -14,6 +14,7 @@ Hit New Array to watch animations on a new random array
 ![alt text](https://github.com/neerajhp/AlgorithmVisualiser/blob/master/Markdown/Images/sorting.gif)
 
 Visualise the shortest path between two points on a grid. Select the option to set the origin point, destination point and obstacle nodes. Obstacle nodes are set by holding down your mouse and dragging across the grid. Hit Visualise! to animate.
+
 ![alt text](https://github.com/neerajhp/AlgorithmVisualiser/blob/master/Markdown/Images/pathfinding.gif)
 
 ## Planned Updates
