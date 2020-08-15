@@ -4,7 +4,7 @@ import './PathfindingCanvas.css';
 import BFS from './Algorithms/BFS';
 
 const NODE_DIM = 40;
-const SORT_SPEED = 30;
+const SORT_SPEED = 20;
 class PathfindingCanvas extends React.Component {
   constructor(props) {
     super(props);
@@ -15,20 +15,28 @@ class PathfindingCanvas extends React.Component {
         width: this.props.container.clientWidth,
         height: this.props.container.clientHeight,
       },
-      onClickMode: this.props.nodeClickMode,
       origin: { x: 5, y: 5 },
       destination: { x: 10, y: 10 },
-      nodeList: this.constructNodeList(this.props.container),
+      onClickMode: this.props.nodeClickMode,
       selectingObs: false,
+      nodeList: this.constructNodeList(this.props.container),
+      step: 1,
     };
   }
 
   componentDidMount() {
-    const max_x = Math.floor(this.state.dimensions.width / NODE_DIM) + 2;
-    const max_y = Math.floor(this.state.dimensions.height / NODE_DIM) + 2;
+    //Get max nodes on axes within view
+    const max_x = Math.floor(this.state.dimensions.width / NODE_DIM);
+    const max_y = Math.floor(this.state.dimensions.height / NODE_DIM);
     //Randomly assign origin
-    this.setOrigin(this.state.origin);
-    this.setDestination(this.state.destination);
+    this.setOrigin({
+      x: Math.floor(Math.random() * Math.floor(max_x)),
+      y: Math.floor(Math.random() * Math.floor(max_y)),
+    });
+    this.setDestination({
+      x: Math.floor(Math.random() * Math.floor(max_x)),
+      y: Math.floor(Math.random() * Math.floor(max_y)),
+    });
     //Event listener for window resize
     window.addEventListener('resize', this.updateDimensions);
   }
@@ -42,11 +50,14 @@ class PathfindingCanvas extends React.Component {
       if (!this.state.active) {
         this.setState({ active: this.props.active }, () => this.animate());
       } else {
-        this.setState({ active: this.props.active });
+        this.setState({
+          active: this.props.active,
+        });
       }
     }
   }
 
+  //Constructs an array of arrays representing all the nodes(grid squares)
   constructNodeList(dimensions) {
     // Get node max indices
     const max_x = Math.floor(dimensions.clientWidth / NODE_DIM) + 2;
@@ -149,31 +160,32 @@ class PathfindingCanvas extends React.Component {
   //Animation
   animate() {
     //Get list of explored nodes from algorithm
-    const stateList = BFS(
+    const explored = BFS(
       this.state.nodeList,
       this.state.origin,
       this.state.destination
     );
 
     //Animate through list of explored nodes
-    let step = 1;
+
     this.sim = setInterval(() => {
       // Check if reached animation end or paused
-      if (step > stateList.length - 1 || !this.state.active) {
+      if (this.state.step > explored.length - 1 || !this.state.active) {
         clearInterval(this.sim);
         //this.props.resetApp();
       } else {
         // Go to next expanded node
-        let node = stateList[step][0];
+        let node = explored[this.state.step][0];
         document
           .getElementById(`square-${node.x}-${node.y}`)
           .classList.add(`${node.class}`);
-        step++;
+        this.setState({ step: this.state.step + 1 });
       }
     }, SORT_SPEED);
   }
 
   constructGrid(dimensions) {
+    //If theres an issue with the parent div
     if (dimensions === null) {
       return (
         <div className='ui segment' style={{ height: 100 + '%' }}>

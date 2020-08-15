@@ -1,9 +1,10 @@
 import './SortingCanvas.css';
 import React from 'react';
 import SortCard from './SortCard';
-import RandArray from '../utils/RandArray';
 import AlgorithmList from './Algorithms/AlgorithmList';
+import RandArray from '../utils/RandArray';
 
+const ARRAY_SIZE = 40;
 class SortingCanvas extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +13,7 @@ class SortingCanvas extends React.Component {
       active: this.props.active,
       selectedAlgorithm: this.props.selectedAlgorithm,
       op: 0,
-      array: this.props.array,
+      array: RandArray(ARRAY_SIZE),
       algorithms: AlgorithmList,
     };
     this.sort(this.state.array);
@@ -33,12 +34,6 @@ class SortingCanvas extends React.Component {
       } else {
         this.setState({ active: this.props.active });
       }
-    }
-    if (this.state.array !== this.props.array) {
-      this.setState(
-        { array: this.props.array, op: 0 },
-        this.sort(this.state.array)
-      );
     }
   }
 

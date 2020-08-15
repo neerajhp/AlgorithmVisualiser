@@ -51,13 +51,13 @@ button {
   background-origin: border-box;
 }
 
-.reset {
-  background-image: -webkit-linear-gradient(
-    left,
-    #b4b3b3,
-    rgb(134, 134, 134),
-    #b4b3b3
-  );
+.reset-active {
+  opacity: 0.6;
+  background: rgb(28, 185, 223);
+}
+
+.reset-disabled {
+  background: #b4b3b3;
 }
 
 .bouncy {

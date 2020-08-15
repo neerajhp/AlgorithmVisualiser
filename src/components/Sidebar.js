@@ -12,9 +12,11 @@ const Sidebar = ({
   resetFn,
 }) => {
   //Button labels
+  var resetButton = 'reset-active';
   var buttonLabel = 'Visualise!';
   if (canvasState.active) {
     buttonLabel = 'Pause animation';
+    resetButton = 'reset-disabled';
   }
 
   var resetLabel = 'Reset canvas';
@@ -49,7 +51,7 @@ const Sidebar = ({
         <button className='bouncy' onClick={() => runFn()}>
           {buttonLabel}
         </button>
-        <button className='reset' onClick={() => resetFn()}>
+        <button className={`${resetButton}`} onClick={() => resetFn()}>
           {resetLabel}
         </button>
       </div>

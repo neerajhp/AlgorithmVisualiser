@@ -5,10 +5,9 @@ import SortingCanvas from './sorting/SortingCanvas';
 import PathfindingCanvas from './pathfinding/PathfindingCanvas';
 import SortingAlgorithms from './sorting/Algorithms/AlgorithmList';
 import PathfinderAlgorithms from './pathfinding/Algorithms/AlgorithmList';
-import RandArray from './utils/RandArray';
 
 const DEFAULT_CANVAS = 'sorting';
-const ARRAY_SIZE = 40;
+
 const SORT_SPEED = 80;
 
 class App extends React.Component {
@@ -18,11 +17,11 @@ class App extends React.Component {
     this.state = {
       canvas: DEFAULT_CANVAS,
       sortingAlg: SortingAlgorithms[0],
-      sortingArray: RandArray(ARRAY_SIZE),
       pfAlg: PathfinderAlgorithms[0],
       nodeClickMode: 'setOrigin',
       active: false,
       speed: SORT_SPEED,
+      resetCanvas: false,
     };
   }
 
@@ -46,9 +45,7 @@ class App extends React.Component {
   };
 
   runAlgorithm = () => {
-    this.setState({ active: !this.state.active }, () =>
-      console.log(this.state.active)
-    );
+    this.setState({ active: !this.state.active, resetCanvas: false });
   };
 
   pause = () => {
@@ -56,25 +53,41 @@ class App extends React.Component {
   };
 
   resetCanvas = () => {
-    if (this.state.canvas === 'sorting') {
-      this.setState({ active: false, sortingArray: RandArray(ARRAY_SIZE) });
-    }
-    if (this.state.canvas === 'pathfinding') {
-      //Clear nodeList
+    if (this.state.active !== true) {
+      if (this.state.canvas === 'sorting') {
+        this.setState({ canvas: '', active: false }, () =>
+          this.setState({ canvas: 'sorting' })
+        );
+      }
+      if (this.state.canvas === 'pathfinding') {
+        this.setState({ canvas: '', active: false }, () =>
+          this.setState({ canvas: 'pathfinding' })
+        );
+      }
     }
   };
 
   getCanvas(container) {
     //Determine Canvas type
     var canvas = (
-      <SortingCanvas
-        selectedAlgorithm={this.state.sortingAlg}
-        array={this.state.sortingArray}
-        active={this.state.active}
-        pauseApp={() => this.pause()}
-        speed={this.state.speed}
-      />
+      <div className='ui segment' style={{ height: 100 + '%' }}>
+        <div className='ui active dimmer'>
+          <div className='ui text loader'>Loading</div>
+        </div>
+        <p></p>
+      </div>
     );
+
+    if (this.state.canvas === 'sorting') {
+      canvas = (
+        <SortingCanvas
+          selectedAlgorithm={this.state.sortingAlg}
+          active={this.state.active}
+          pauseApp={() => this.pause()}
+          speed={this.state.speed}
+        />
+      );
+    }
 
     if (this.state.canvas === 'pathfinding') {
       canvas = (
@@ -83,6 +96,8 @@ class App extends React.Component {
           active={this.state.active}
           nodeClickMode={this.state.nodeClickMode}
           pauseApp={() => this.pause()}
+          reset={this.state.resetCanvas}
+          speed={this.state.speed}
         />
       );
     }
