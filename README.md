@@ -18,7 +18,6 @@ Visualise the shortest path between two points on a grid. Select the option to s
 
 ## Planned Updates
 
-* Functionality to reset Pathfinding canvas after intiating an animation
 * Functionality to set sort speed and array size
 * Additional pathfinding algorithms to be added (Djikstra, A*, Greedy)
 * Review sorting algorithm implementation
